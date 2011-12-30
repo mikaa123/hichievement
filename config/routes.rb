@@ -1,5 +1,9 @@
 MongoRspecOmniProj::Application.routes.draw do
 
+  resources :action_items
+
+  resources :actions
+
   # Home page
   root :to => 'home#index'
 
