@@ -1,6 +1,7 @@
 <h3>User Profile</h3>
 <p>Name: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+
 <% @user.p_actions.each do |p_action| %>
   <%= p_action.description %> puis
 <% end %>
@@ -15,4 +16,7 @@
   :id => @user.id, 
   :action_item => action_item}) %>
   </p>
+
+<% if user_signed_in? and current_user == User.find(params[:id]) %>
+  <%= link_to "Edit", edit_user_path(@user) %>
 <% end %>

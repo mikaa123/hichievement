@@ -1,9 +1,10 @@
 MongoRspecOmniProj::Application.routes.draw do
 
+  resources :achievements
   resources :action_items
-
-  resources :actions
-
+  resources :performed_actions, :only => [ :create]
+  
+  get "/dashboard" => 'dashboard#index'
   # Home page
   root :to => 'home#index'
 

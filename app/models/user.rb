@@ -4,7 +4,7 @@ class User
   field :uid, :type => String
   field :name, :type => String
   field :email, :type => String
-  embeds_many :p_actions
+  embeds_many :performed_actions
   # This protects the attributes from mass-assignment (i.e. new(args))
   attr_protected :provider, :uid
 
@@ -21,10 +21,3 @@ class User
   end
 end
 
-class Performed_action
-  include Mongoid::Document
-  include Mongoid::Timestamps::Created
-  belongs_to :actionitem
-  embedded_in :user
-  
-end
