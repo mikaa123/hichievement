@@ -14,4 +14,11 @@ FactoryGirl.define do
     email     'some@email.com'
     provider  'twitter'
   end
+
+  factory :action_item do
+    description	"bliblablou"
+  end
+
+  factory :perfored_action do
+  end
 end

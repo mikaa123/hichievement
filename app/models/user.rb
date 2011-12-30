@@ -4,7 +4,7 @@ class User
   field :uid, :type => String
   field :name, :type => String
   field :email, :type => String
-
+  embeds_many :performed_actions
   # This protects the attributes from mass-assignment (i.e. new(args))
   attr_protected :provider, :uid
 
@@ -20,3 +20,4 @@ class User
     end
   end
 end
+

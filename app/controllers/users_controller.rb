@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   # This page is public
   def show
     @user = User.find(params[:id])
+	@action_items = ActionItem.all
   end
 
   def edit
