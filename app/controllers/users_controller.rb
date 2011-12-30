@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :correct_user?
+  before_filter :authenticate_user!, :correct_user?, :except => :show
 
+  # This page is public
   def show
     @user = User.find(params[:id])
   end

@@ -1,3 +1,6 @@
 <h3>User Profile</h3>
 <p>Name: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+<% if user_signed_in? and current_user == User.find(params[:id]) %>
+<%= link_to "Edit", edit_user_path(@user) %>
+<% end %>
