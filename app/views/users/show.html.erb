@@ -2,20 +2,9 @@
 <p>Name: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
-<% @user.p_actions.each do |p_action| %>
-  <%= p_action.description %> puis
+<% @user.performed_actions.each do |p_action| %>
+  <%= p_action.action_item.description %> / 
 <% end %>
-
-
-<% @action_items.each do |action_item| %>
-  <p>
-  <%= action_item.description %> :
-  <%= link_to(action_item.description,	
-  {:controller => "users", 
-  :action => "create_action_performed", 
-  :id => @user.id, 
-  :action_item => action_item}) %>
-  </p>
 
 <% if user_signed_in? and current_user == User.find(params[:id]) %>
   <%= link_to "Edit", edit_user_path(@user) %>

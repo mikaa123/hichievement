@@ -16,8 +16,9 @@ class PerformedActionsController < ApplicationController
   end
   
   def create
+    p params
     @user=current_user
-	if @user.performed_actions.create!(user: @user,action_item: params[:action_item])
+	if @user.performed_actions.create!(user: @user,action_item: params[:form][:action_item])
 	  redirect_to @user
 	else
 	  redirect_to @user
