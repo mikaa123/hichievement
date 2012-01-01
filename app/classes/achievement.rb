@@ -13,6 +13,7 @@ class Achievement
       new_achievement = Achievement.new( name )
       new_achievement.instance_eval( &blk_def )
       List << new_achievement
+      
       new_achievement
     end
   end

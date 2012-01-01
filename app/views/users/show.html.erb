@@ -6,6 +6,10 @@
   <%= p_action.action_item.description %> / 
 <% end %>
 
+<% @user.unlocked_achievements.each do |achievement| %>
+  <%= achievement.name %> / 
+<% end %>
+
 <% if user_signed_in? and current_user == User.find(params[:id]) %>
   <%= link_to "Edit", edit_user_path(@user) %>
 <% end %>

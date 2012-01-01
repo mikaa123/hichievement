@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # This page is public
   def show
     @user = User.find(params[:id])
-	@action_items = ActionItem.all
+	  @action_items = ActionItem.all
   end
 
   def edit
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      redirect_to @user
+      redirect_to dashboard_path
     else
       render :edit
     end

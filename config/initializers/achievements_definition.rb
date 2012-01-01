@@ -5,6 +5,10 @@ Achievement.define "Eating Achievement" do
   set_img_url "http://some-image.com"
   
   define_rule do |user|
-    true
+    if user.performed_actions.count >= 2
+      true
+    else
+      false
+    end
   end
 end

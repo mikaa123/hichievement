@@ -5,6 +5,8 @@ class User
   field :name, :type => String
   field :email, :type => String
   embeds_many :performed_actions
+  embeds_many :unlocked_achievements
+  
   # This protects the attributes from mass-assignment (i.e. new(args))
   attr_protected :provider, :uid
 
