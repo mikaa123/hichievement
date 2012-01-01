@@ -6,16 +6,33 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<ul class="hmenu">
-  <%= render 'shared/navigation' %>
-</ul>
-
-<%- flash.each do |name, msg| -%>
-  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-<%- end -%>
-<%= yield %>
-
+<body style="padding-top: 60px">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container-fluid">
+        <h3><%= link_to "MongoRspecOmniProj", "/" %></h3>
+        <ul class="nav">
+          <li><%= link_to "Link1", "/path1"  %></li>
+          <li><%= link_to "Link2", "/path2"  %></li>
+          <li><%= link_to "Link3", "/path3"  %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="sidebar">
+      <div class="well">
+        <h5>Sidebar</h5>
+        <ul>
+          <li><%= link_to "Link1", "/path1"  %></li>
+          <li><%= link_to "Link2", "/path2"  %></li>
+          <li><%= link_to "Link3", "/path3"  %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

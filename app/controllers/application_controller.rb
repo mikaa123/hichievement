@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
         nil
       end
     end
+    
+    # To be used as a before filter
+    def require_login
+      redirect_to root_url, :alert => "Need to be logged" unless user_signed_in?
+    end
 
     def user_signed_in?
       return true if current_user

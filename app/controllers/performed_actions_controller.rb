@@ -17,7 +17,7 @@ class PerformedActionsController < ApplicationController
   
   def create
     user = current_user
-    action_item = ActionItem.find(params[:form][:action_item])
+    action_item = ActionItem.find(params[:action_item])
     
     if user.performed_actions.create!(user: user, action_item: action_item)
       # Let's ask the rule master which achievement the user has just

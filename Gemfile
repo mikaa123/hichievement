@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+source 'http://production.cf.rubygems.org'
 
 gem 'rails', '3.1.3'
 
@@ -13,6 +14,9 @@ gem 'omniauth-twitter'
 # For the databse, we use MongoDB using Mongoid gem
 gem 'mongoid'
 gem 'bson_ext'
+
+# To bootstrap the UI, we can use twitter bootstrap project
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # helps us during testing
 gem 'rspec-rails', :group => [:development, :test]

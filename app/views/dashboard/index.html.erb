@@ -1,10 +1,10 @@
-<h1>Dashboard#index</h1>
+<div class="page-header">
+  <h1>Hey <%= current_user.name %> <small>Report your daily activities here</small></h1>
+</div>
+<div class="action_group">
 <% @action_items.each do |a_item| %>
-  <p>
-  <%= button_to(
-  a_item.description,
-  :action => "create",
-  :controller => "performed_actions",
-  :form => {:action_item => a_item}) %>
-  </p>
+  <%= button_to a_item.description,
+			{ :controller => "performed_actions", :action => "create", :action_item => a_item },
+			:class => "btn large" %>
 <%end%>
+</div>
