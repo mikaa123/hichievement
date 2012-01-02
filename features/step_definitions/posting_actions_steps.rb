@@ -13,7 +13,7 @@ Given /^I am logged$/ do
 end
 
 When /^there is an Eating action available$/ do
-  ActionItem.create!(description: "Eat")
+  ActionItem.create!(name: "Eat")
 end
 
 When /^I select an Eating action$/ do

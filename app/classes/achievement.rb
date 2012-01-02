@@ -1,4 +1,7 @@
 class Achievement
+  # RuleHelper gives handy methods to work with rule definitions
+  include RuleHelper
+  
   # Contains the list of all the achievements
   List = []
   

@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   include ActionView::Helpers::DateHelper
   
   def index
-	  @action_items = ActionItem.all
+	  @action_groups = ActionGroup.all
   end
   
   def calendar

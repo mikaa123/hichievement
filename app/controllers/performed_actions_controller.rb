@@ -19,7 +19,8 @@ class PerformedActionsController < ApplicationController
     user = current_user
     action_item = ActionItem.find(params[:action_item])
     
-    if user.performed_actions.create!(user: user, action_item: action_item)
+    if user.performed_actions.create!(action_item: action_item)
+      
       # Let's ask the rule master which achievement the user has just
       # unlocked!!!11
       achievements_unlocked = RuleMaster.unlocked_achievements( user )
@@ -33,8 +34,8 @@ class PerformedActionsController < ApplicationController
           flash[:success] = "Achievement unlocked: #{achievement_name}"
         end
       end
-      
-      redirect_to dashboard_path, :notice => "#{action_item.description} added"
+
+      redirect_to dashboard_path, :notice => "#{action_item.name} added"
     else
       # Error
       redirect_to dashboard_path, :error => "Couldn't add action"

@@ -3,7 +3,7 @@
 <p>Email: <%= @user.email if @user.email %></p>
 
 <% @user.performed_actions.each do |p_action| %>
-  <%= p_action.action_item.description %> / 
+  <%= p_action.action_item.name %> / 
 <% end %>
 
 <% @user.unlocked_achievements.each do |achievement| %>

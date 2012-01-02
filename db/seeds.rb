@@ -7,7 +7,21 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 puts 'EMPTY THE MONGODB DATABASE'
 Mongoid.master.collections.reject { |c| c.name =~ /^system/}.each(&:drop)
-ActionItem.create(description:"manger")
-ActionItem.create(description:"faire caca")
-ActionItem.create(description:"dormir")
-ActionItem.create(description:"niquer")
+
+# Let's create some groups
+daily = ActionGroup.create!(name: "Daily")
+sport = ActionGroup.create!(name: "Sport")
+healthy = ActionGroup.create!(name: "Healthy")
+intel = ActionGroup.create!(name: "Intellectual")
+
+ActionItem.create!(name:"manger").action_groups << daily
+ActionItem.create!(name:"faire caca").action_groups << daily
+ActionItem.create!(name:"dormir").action_groups << daily
+
+ActionItem.create!(name:"niquer").action_groups << healthy
+
+ActionItem.create!(name:"read").action_groups << intel
+
+ActionItem.create!(name:"jogging").action_groups << sport
+
+ActionItem.create!(name:"didn't smoke").action_groups << healthy

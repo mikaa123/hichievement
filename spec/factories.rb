@@ -5,6 +5,7 @@
 FactoryGirl.define do
   sequence(:username) { |n| "user-#{n}" }
   sequence(:uid) { |n| n }
+  sequence(:groupe_name) { |n| "groupe-#{n}" }
 
   # Putting things between brackets makes it lazy. It'll be
   # evaluated later on
@@ -16,9 +17,13 @@ FactoryGirl.define do
   end
 
   factory :action_item do
-    description	"bliblablou"
+    name	"bliblablou"
   end
 
   factory :perfored_action do
+  end
+  
+  factory :action_group do
+    name      { Factory.next :groupe_name }
   end
 end

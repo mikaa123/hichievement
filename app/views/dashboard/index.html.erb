@@ -17,15 +17,17 @@
 					<p><%= flash[:success] %></p>
 				</div>
 				<% end %>
-
-				<h3>Actions available</h3>
-				<div class="action_group">
-					<% @action_items.each do |a_item| %>
-					<%= button_to a_item.description,
-					{ :controller => "performed_actions", :action => "create", :action_item => a_item },
-					:class => "btn" %>
-					<%end%>
-				</div>
+				
+				<% @action_groups.each do |action_group| %>
+				<h3><%= action_group.name %></h3>
+				
+					<% action_group.action_items.each do |action_item| %>
+						<%= button_to action_item.name,
+								{ :controller => "performed_actions", :action => "create", :action_item => action_item },
+									:class => "btn"
+						%>
+					<% end %>
+				<% end %>
 
 			</div>
 			<div class="span4">
@@ -36,7 +38,7 @@
 				
 				<h3>Latest actions</h3>
 				<% current_user.performed_actions.each do |action| %>
-				<span class="label"><%= action.action_item.description%></span>
+				<span class="label"><%= action.action_item.name%></span>
 				<% end %>
 			</div>
 		</div>
