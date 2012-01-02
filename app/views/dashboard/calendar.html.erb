@@ -1,0 +1,29 @@
+<div class="content">
+	<div class="page-header">
+		<h1>Calendar <small>Because it looks nicer</h1>
+		</div>
+		<div class="row">
+			<div class="span10">
+
+				<% @calendar.each_with_index do |daily_activities, index| %>
+					<h3><%= index.days.ago.strftime("%A") %></h3>
+					<% daily_activities.each do |action_item| %>
+						<%= action_item.description %>
+					<% end %>
+				<% end %>
+
+			</div>
+			<div class="span4">
+				<h3>Achievements unlocked</h3>
+				<% current_user.unlocked_achievements.each do |achievement| %>
+					<span class="label success"><%= achievement.name %></span>
+				<% end %>
+				
+				<h3>Latest actions</h3>
+				<% current_user.performed_actions.each do |action| %>
+				<span class="label"><%= action.action_item.description%></span>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

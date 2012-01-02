@@ -30,6 +30,7 @@ class PerformedActionsController < ApplicationController
         unless user.unlocked_achievements.where(name: achievement_name).first
           # The user doesn't have the achievement yet!!11 let's add it!!!
           user.unlocked_achievements.create!(name: achievement_name)
+          flash[:success] = "Achievement unlocked: #{achievement_name}"
         end
       end
       

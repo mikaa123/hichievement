@@ -12,3 +12,16 @@ Achievement.define "Eating Achievement" do
     end
   end
 end
+
+Achievement.define "Super Achievement" do
+  set_desc "Yay."
+  set_img_url "http://some-image.com"
+  
+  define_rule do |user|
+    if user.performed_actions.count >= 5
+      true
+    else
+      false
+    end
+  end
+end

@@ -1,10 +1,44 @@
-<div class="page-header">
-  <h1>Hey <%= current_user.name %> <small>Report your daily activities here</small></h1>
-</div>
-<div class="action_group">
-<% @action_items.each do |a_item| %>
-  <%= button_to a_item.description,
-			{ :controller => "performed_actions", :action => "create", :action_item => a_item },
-			:class => "btn large" %>
-<%end%>
+<div class="content">
+	<div class="page-header">
+		<h1>Dashboard <small>Report your daily actions</h1>
+		</div>
+		<div class="row">
+			<div class="span10">
+				<% if flash[:notice] %>
+				<div class="alert-message warning">
+					<a class="close" href="#">×</a>
+					<p><%= flash[:notice]%></p>
+				</div>
+				<% end %>
+
+				<% if flash[:success] %>
+				<div class="alert-message success">
+					<a class="close" href="#">×</a>
+					<p><%= flash[:success] %></p>
+				</div>
+				<% end %>
+
+				<h3>Actions available</h3>
+				<div class="action_group">
+					<% @action_items.each do |a_item| %>
+					<%= button_to a_item.description,
+					{ :controller => "performed_actions", :action => "create", :action_item => a_item },
+					:class => "btn" %>
+					<%end%>
+				</div>
+
+			</div>
+			<div class="span4">
+				<h3>Achievements unlocked</h3>
+				<% current_user.unlocked_achievements.each do |achievement| %>
+					<span class="label success"><%= achievement.name %></span>
+				<% end %>
+				
+				<h3>Latest actions</h3>
+				<% current_user.performed_actions.each do |action| %>
+				<span class="label"><%= action.action_item.description%></span>
+				<% end %>
+			</div>
+		</div>
+	</div>
 </div>
