@@ -1,11 +1,11 @@
 # This file defines all the achievements of our application
 
-Achievement.define "Eating Achievement" do
-  set_desc "You ate well for 20 days! Woohoo."
+Achievement.define "HelloWorld!" do
+  set_desc "Congratulation, you just performed your first action!"
   set_img_url "http://some-image.com"
   
   define_rule do |user|
-    if user.performed_actions.count >= 2
+    if user.performed_actions.count >= 1
       true
     else
       false
@@ -13,12 +13,13 @@ Achievement.define "Eating Achievement" do
   end
 end
 
-Achievement.define "Super Achievement" do
-  set_desc "Yay."
+Achievement.define "OMG!" do
+  set_desc "No f. way!"
   set_img_url "http://some-image.com"
   
   define_rule do |user|
-    if user.performed_actions.count >= 5
+    
+    if user.performed_actions.where(name: "niquer").count >= 5
       true
     else
       false

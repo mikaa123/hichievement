@@ -19,7 +19,7 @@ class PerformedActionsController < ApplicationController
     user = current_user
     action_item = ActionItem.find(params[:action_item])
     
-    if user.performed_actions.create!(action_item: action_item)
+    if user.performed_actions.create!(action_item: action_item, name: action_item.name)
       
       # Let's ask the rule master which achievement the user has just
       # unlocked!!!11
