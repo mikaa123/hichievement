@@ -59,9 +59,9 @@ describe RuleHelper do
     before(:all) do
       @rule_helper_obj = Object.new.extend(RuleHelper)
       @performed_actions = [
-          MockPerformedAction.new("Eat", "Healthy", Time.new("2012-01-01 12:34:52 +0100")),
-          MockPerformedAction.new("Eat", "Healthy", Time.new("2012-01-02 12:34:52 +0100")),
-          MockPerformedAction.new("Eat", "Healthy", Time.new("2012-01-03 12:34:52 +0100")),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 01, 01)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 01, 02)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 01, 02)),
         ]
     end
     
@@ -86,24 +86,90 @@ describe RuleHelper do
     end
     
     it "should return true if an action has been performed on that date" do
-      date = Time.new("2012-01-02 12:34:52 +0100").to_date
+      date = Time.new(2012, 1, 2).to_date
       @rule_helper_obj.action_performed_on_date?(@performed_actions, date, action: "Eat").should be_true
     end
     
     it "should return false if an action has not been performed on that date" do
-      date = Time.new.to_date
+      date = Time.new(2012, 1, 5).to_date
       @rule_helper_obj.action_performed_on_date?(@performed_actions, date, action: "Eat").should be_false
     end
     
     it "should return true if an action of a group has been performed on that date" do
-      date = Time.new("2012-01-02 12:34:52 +0100").to_date
+      date = Time.new(2012, 1, 2).to_date
       @rule_helper_obj.action_performed_on_date?(@performed_actions, date, group: "Healthy").should be_true
     end
     
     it "should return true if an action of a group hasn't been performed on that date" do
-      date = Time.new.to_date
+      date = Time.new(2012, 1, 5).to_date
       @rule_helper_obj.action_performed_on_date?(@performed_actions, date, group: "Healthy").should be_false
     end
-    
   end
+  
+  describe "repeated_on_date method" do
+    before(:all) do
+      @rule_helper_obj = Object.new.extend(RuleHelper)
+      @performed_actions = [
+          MockPerformedAction.new("Foo", "Healthy", Time.new(2012, 1, 1)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 2)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 2)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 2)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 3)),
+        ]
+    end
+    
+    it "should raise an exception if the date, performed actions or action/group is nil" do
+      expect {
+        @rule_helper_obj.repeated_on_date(nil, Date.now, action: "Eat")
+      }.to raise_error
+      
+      expect {
+        @rule_helper_obj.repeated_on_date([], nil, action: "Eat")
+      }.to raise_error
+      
+      expect {
+        @rule_helper_obj.repeated_on_date([], Date.now, nil)
+      }.to raise_error
+    end
+    
+    it "should count how many time an action has been performed on a day" do
+      date = Time.new(2012, 1, 2).to_date
+      
+      @rule_helper_obj.repeated_on_date(@performed_actions, date, action: "Eat").should == 3
+    end
+  end
+  
+  describe "ever_been_repeated_the_same_day? method" do
+    before(:all) do
+      @rule_helper_obj = Object.new.extend(RuleHelper)
+      @performed_actions = [
+          MockPerformedAction.new("Foo", "Healthy", Time.new(2012, 1, 1)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 2)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 2)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 2)),
+          MockPerformedAction.new("Eat", "Healthy", Time.new(2012, 1, 3)),
+        ]
+    end
+    
+    it "should return false if performed_actions is empty" do
+      @rule_helper_obj.ever_been_repeated_the_same_day?([], 5, action: "Eat").should be_false
+    end
+    
+    it "should return true if an action (or group) has been performed n time one day" do
+      @rule_helper_obj.ever_been_repeated_the_same_day?(
+        @performed_actions, 3, action: "Eat").should be_true
+        
+      @rule_helper_obj.ever_been_repeated_the_same_day?(
+        @performed_actions, 3, group: "Healthy").should be_true
+    end
+    
+    it "should return false if an action (or group) has never been performed n times in a day" do
+      @rule_helper_obj.ever_been_repeated_the_same_day?(
+        @performed_actions, 4, action: "Eat").should be_false
+        
+      @rule_helper_obj.ever_been_repeated_the_same_day?(
+        @performed_actions, 4, group: "Healthy").should be_false
+    end
+  end
+  
 end

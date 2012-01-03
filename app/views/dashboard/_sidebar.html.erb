@@ -1,0 +1,6 @@
+<h3>Achievements unlocked</h3>
+<%= render :partial =>'achievements/achievement',
+	:collection => user.unlocked_achievements %>
+
+<h3>Latest actions</h3>
+<%= render user.performed_actions %>
