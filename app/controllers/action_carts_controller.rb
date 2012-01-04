@@ -26,7 +26,12 @@ class ActionCartsController < ApplicationController
     # Checking out the cart returns the list of all the newly obtained
     # achievements. We want to use them to construct an appropriate flash
     # message
-
-    redirect_to dashboard_path, success: "Achievement(s) unlocked: #{current_user.checkout_cart * ', '}"
+    achievements_unlocked = current_user.checkout_cart * ', '
+    
+    unless achievements_unlocked.empty?
+      redirect_to dashboard_path, :flash => { achievements: "Achievement(s) unlocked: #{achievements_unlocked}" }
+    else
+      redirect_to dashboard_path
+    end
   end
 end

@@ -40,7 +40,7 @@ class User
     achievements = action_cart.action_cart_items.map do |item|
       
       action_item = item.action_item
-      if performed_actions.create!(action_item: action_item, name: action_item.name)
+      if performed_actions.create!(action_item: action_item, name: action_item.name, date: Date.today)
         
         # This returns an array of unlocked achievements
         RuleMaster.unlocked_achievements( self )
@@ -62,7 +62,7 @@ class User
     empty_cart
     
     # Return the name of the newly obtained achievements
-    new_achievements
+    new_achievements.compact
   end
 end
 

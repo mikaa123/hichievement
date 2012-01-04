@@ -11,12 +11,14 @@
 				</div>
 				<% end %>
 
-				<% if flash[:success] %>
+				<% if flash[:achievements] %>
 				<div class="alert-message success">
 					<a class="close" href="#">×</a>
-					<p><%= flash[:success] %></p>
+					<p><%= flash[:achievements] %></p>
 				</div>
 				<% end %>
+				
+				<h3>Click on what you did today</h3>
 				
 				<%= render current_user.action_cart if current_user.action_cart %>
 				
