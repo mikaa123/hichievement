@@ -1,11 +1,30 @@
 require 'spec_helper'
 
 class MockPerformedAction
-  attr_accessor :name, :group, :created_at
+  attr_accessor :name, :action_item, :created_at
   def initialize(name, group, created_at)
     @name = name
-    @group = group
+    @action_item = MockActionItem.new(name, group)
     @created_at = created_at
+  end
+  
+  def group
+    @action_item.action_group
+  end
+end
+
+class MockActionItem
+  attr_accessor :name, :action_group
+  def initialize(name, group)
+    @name = name
+    @action_group = MockActionGroup.new(group)
+  end
+end
+
+class MockActionGroup
+  attr_accessor :name
+  def initialize(name)
+    @name = name
   end
 end
 

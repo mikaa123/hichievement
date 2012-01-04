@@ -1,6 +1,5 @@
 <h3>Achievements unlocked</h3>
-<%= render :partial =>'achievements/achievement',
-	:collection => user.unlocked_achievements %>
+<%= render user.unlocked_achievements %>
 
 <h3>Today's actions</h3>
 <%= render user.performed_actions.where(:date => Date.today) %>

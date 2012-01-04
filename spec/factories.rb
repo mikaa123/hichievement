@@ -27,6 +27,7 @@ FactoryGirl.define do
 
   factory :action_item do
     name	"bliblablou"
+    action_group { Factory.build(:action_group) }
   end
 
   factory :perfored_action do

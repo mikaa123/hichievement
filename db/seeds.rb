@@ -9,19 +9,25 @@ puts 'EMPTY THE MONGODB DATABASE'
 Mongoid.master.collections.reject { |c| c.name =~ /^system/}.each(&:drop)
 
 # Let's create some groups
-daily = ActionGroup.create!(name: "Daily")
-sport = ActionGroup.create!(name: "Sport")
-healthy = ActionGroup.create!(name: "Healthy")
-intel = ActionGroup.create!(name: "Intellectual")
+food = ActionGroup.create!(name: "Food")
+drink = ActionGroup.create!(name: "Drink")
 
-ActionItem.create!(name:"manger").action_groups << daily
-ActionItem.create!(name:"faire caca").action_groups << daily
-ActionItem.create!(name:"dormir").action_groups << daily
+food.action_items << ActionItem.new(name:"Pizza")
+food.action_items << ActionItem.new(name:"Rice")
+food.action_items << ActionItem.new(name:"Pasta")
+food.action_items << ActionItem.new(name:"Soup")
+food.action_items << ActionItem.new(name:"Burger")
+food.action_items << ActionItem.new(name:"Fries")
+food.action_items << ActionItem.new(name:"Vegetable")
+food.action_items << ActionItem.new(name:"Fruit")
 
-ActionItem.create!(name:"niquer").action_groups << healthy
-
-ActionItem.create!(name:"read").action_groups << intel
-
-ActionItem.create!(name:"jogging").action_groups << sport
-
-ActionItem.create!(name:"didn't smoke").action_groups << healthy
+drink.action_items << ActionItem.new(name:"Red Wine")
+drink.action_items << ActionItem.new(name:"White Wine")
+drink.action_items << ActionItem.new(name:"Coffee")
+drink.action_items << ActionItem.new(name:"Tea")
+drink.action_items << ActionItem.new(name:"Hot Chocoloate")
+drink.action_items << ActionItem.new(name:"Juice")
+drink.action_items << ActionItem.new(name:"Water")
+drink.action_items << ActionItem.new(name:"Beer")
+drink.action_items << ActionItem.new(name:"Champagne")
+drink.action_items << ActionItem.new(name:"Strong alcohol")

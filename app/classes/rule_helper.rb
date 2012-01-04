@@ -31,7 +31,7 @@ module RuleHelper
         if action
           res = true if performed_action.name == action
         elsif group
-          res = true if performed_action.group == group
+          res = true if performed_action.group.name == group
         end
       end
     end
@@ -55,7 +55,7 @@ module RuleHelper
         if action
           res += 1 if performed_action.name == action
         elsif group
-          res += 1 if performed_action.group == group
+          res += 1 if performed_action.group.name == group
         end
       end
     end

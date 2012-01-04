@@ -12,4 +12,8 @@ class PerformedAction
   # For simplicity, let's duplicate the name of
   # the action item here
   field :name, :type => String
+  
+  def group
+    action_item.action_group
+  end
 end

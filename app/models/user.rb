@@ -36,7 +36,7 @@ class User
     raise "Empty cart" if action_cart.empty?
     
     # For each item in the cart, we add them to the user's
-    # performed actions and retrieve any unlocked achievement
+    # performed actions and retrieve any unlocked achievement object
     achievements = action_cart.action_cart_items.map do |item|
       
       action_item = item.action_item
@@ -48,13 +48,13 @@ class User
       
     end
     
-    # Creates an array with all the newly obtained achievements, and returns it
-    new_achievements = achievements.compact.flatten.map do |achievement_name|
-      unless unlocked_achievements.where(name: achievement_name).exists?
+    # Creates an array with the names of the newly obtained achievements
+    new_achievements = achievements.compact.flatten.map do |achievement|
+      unless unlocked_achievements.where(name: achievement.name).exists?
         
         # The user doesn't have the achievement yet!!11 let's add it!!!
-        unlocked_achievements.create!(name: achievement_name)
-        achievement_name
+        unlocked_achievements.create!(name: achievement.name, desc: achievement.desc)
+        achievement.name
       end
     end
     

@@ -15,7 +15,7 @@ describe RuleMaster do
       user = Factory.create(:user)
       
       # Describe an achievement here
-      Achievement.define "RuleMaster Achievement" do
+      achievement = Achievement.define "RuleMaster Achievement" do
         set_desc "Foo"
         set_img_url "Bar"
         
@@ -24,7 +24,7 @@ describe RuleMaster do
         end
       end
       
-      RuleMaster.unlocked_achievements(user).should include("RuleMaster Achievement")
+      RuleMaster.unlocked_achievements(user).should include(achievement)
     end
 
   end

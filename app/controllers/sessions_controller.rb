@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user.email == ''
       redirect_to edit_user_path(user), :alert => 'Please enter your email address.'
     else
-      redirect_to "/dashboard", :notice => "Signed in!"
+      redirect_to "/dashboard"
     end
   end
 

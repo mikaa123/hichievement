@@ -5,6 +5,6 @@ class ActionGroup
   
   validates_uniqueness_of :name
   
-  # n..n relationship with ActionItem
-  has_and_belongs_to_many :action_items
+  # 1..n relationship with ActionItem
+  has_many :action_items
 end

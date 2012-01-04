@@ -4,5 +4,5 @@ class ActionItem
   field :description, :type => String
   
   # n..n relationship with ActionGroup
-  has_and_belongs_to_many :action_groups
+  belongs_to :action_group
 end
