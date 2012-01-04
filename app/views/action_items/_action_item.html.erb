@@ -1,4 +1,4 @@
 <%= button_to action_item.name,
-		{ :controller => "performed_actions", :action => "create", :action_item => action_item },
+		{ :controller => "action_carts", :action => "add_to_cart", :action_item => action_item },
 			:class => "btn"
 %>

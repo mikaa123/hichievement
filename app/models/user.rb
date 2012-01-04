@@ -7,6 +7,9 @@ class User
   embeds_many :performed_actions
   embeds_many :unlocked_achievements
   
+  # The action cart stores the actions to be validated
+  embeds_one :action_cart
+  
   # This protects the attributes from mass-assignment (i.e. new(args))
   attr_protected :provider, :uid
 
@@ -20,6 +23,46 @@ class User
         user.email = auth['info']['email'] || ""
       end
     end
+  end
+  
+  # Removes all items from the cart
+  def empty_cart
+    action_cart.action_cart_items.delete_all
+  end
+  
+  # Creates performed actions from the action_cart
+  def checkout_cart
+    raise "No cart for user" if action_cart.nil?
+    raise "Empty cart" if action_cart.empty?
+    
+    # For each item in the cart, we add them to the user's
+    # performed actions and retrieve any unlocked achievement
+    achievements = action_cart.action_cart_items.map do |item|
+      
+      action_item = item.action_item
+      if performed_actions.create!(action_item: action_item, name: action_item.name)
+        
+        # This returns an array of unlocked achievements
+        RuleMaster.unlocked_achievements( self )
+      end
+      
+    end
+    
+    # Creates an array with all the newly obtained achievements, and returns it
+    new_achievements = achievements.compact.flatten.map do |achievement_name|
+      unless unlocked_achievements.where(name: achievement_name).exists?
+        
+        # The user doesn't have the achievement yet!!11 let's add it!!!
+        unlocked_achievements.create!(name: achievement_name)
+        achievement_name
+      end
+    end
+    
+    # Empty the cart
+    empty_cart
+    
+    # Return the name of the newly obtained achievements
+    new_achievements
   end
 end
 

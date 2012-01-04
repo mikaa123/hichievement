@@ -10,10 +10,19 @@ FactoryGirl.define do
   # Putting things between brackets makes it lazy. It'll be
   # evaluated later on
   factory :user do
-    uid       { Factory.next :uid }
-    name      { Factory.next :username }
-    email     'some@email.com'
-    provider  'twitter'
+    uid         { Factory.next :uid }
+    name        { Factory.next :username }
+    email       'some@email.com'
+    provider    'twitter'
+    action_cart { Factory.build(:action_cart) }
+  end
+  
+  factory :action_cart do
+    action_cart_items { [ Factory.build(:action_cart_item), Factory.build(:action_cart_item) ] }
+  end
+  
+  factory :action_cart_item do
+    action_item { Factory.build(:action_item) }
   end
 
   factory :action_item do

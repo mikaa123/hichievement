@@ -1,0 +1,8 @@
+<% unless action_cart.action_cart_items.empty? %>
+	<h4>Currently selected actions</h4>
+	<%= render action_cart.action_cart_items %>
+
+	<div class="actions">
+<%= button_to 'Submit',	{ controller: 'action_carts', action: 'checkout_cart' }, type: 'submit', :class => 'btn primary' %>&nbsp;<%= button_to 'Cancel',	{ controller: 'action_carts', action: 'empty_cart' }, type: 'reset', :class => 'btn' %>
+</div>
+<% end %>
