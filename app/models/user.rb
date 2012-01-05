@@ -1,7 +1,9 @@
 class User
   include Mongoid::Document
-  field :provider, :type => String
-  field :uid, :type => String
+  # field :provider, :type => String
+  # field :uid, :type => String
+  
+  field :providers, :type => Hash
   field :name, :type => String
   field :email, :type => String
   embeds_many :performed_actions
@@ -16,8 +18,7 @@ class User
   # Creates a new user from the given provider
   def self.create_with_omniauth(auth)
     new_user = create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
+      user.providers = { auth['provider'] => auth['uid'] }
       if auth['info']
         user.name = auth['info']['name'] || ""
         user.email = auth['info']['email'] || ""

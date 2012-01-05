@@ -10,10 +10,9 @@ FactoryGirl.define do
   # Putting things between brackets makes it lazy. It'll be
   # evaluated later on
   factory :user do
-    uid         { Factory.next :uid }
     name        { Factory.next :username }
     email       'some@email.com'
-    provider    'twitter'
+    providers   Hash.new['twitter'] = "234324"
     action_cart { Factory.build(:action_cart) }
   end
   
