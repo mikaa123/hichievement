@@ -1,1 +1,3 @@
-<span class="label success"><%= unlocked_achievement.name %></span> 
+<span class="label success">
+	<%= link_to unlocked_achievement.name, { :action => :show_unlocked_achievement, :id => unlocked_achievement.id } %>
+</span> 

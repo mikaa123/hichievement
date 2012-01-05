@@ -15,7 +15,7 @@ class User
 
   # Creates a new user from the given provider
   def self.create_with_omniauth(auth)
-    create! do |user|
+    new_user = create! do |user|
       user.provider = auth['provider']
       user.uid = auth['uid']
       if auth['info']
@@ -23,6 +23,10 @@ class User
         user.email = auth['info']['email'] || ""
       end
     end
+    
+    # Gives a new action cart for the new user
+    new_user.create_action_cart
+    new_user
   end
   
   # Removes all items from the cart
@@ -32,7 +36,7 @@ class User
   
   # Creates performed actions from the action_cart
   def checkout_cart
-    raise "No cart for user" if action_cart.nil?
+    # raise "No cart for user" if action_cart.nil?
     raise "Empty cart" if action_cart.empty?
     
     # For each item in the cart, we add them to the user's

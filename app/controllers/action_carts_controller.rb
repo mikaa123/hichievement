@@ -5,10 +5,12 @@ class ActionCartsController < ApplicationController
   # Param: action_item  
   def add_to_cart
     # If a user doesn't have a cart yet, we create it
-    current_user.create_action_cart unless current_user.action_cart
+    # current_user.create_action_cart unless current_user.action_cart
     
+    action_item = ActionItem.find(params[:action_item])
     # We create a new ActionCartItem, and add it to the cart
-    current_user.action_cart.action_cart_items.create!(action_item: params[:action_item])
+    current_user.action_cart.action_cart_items.create!(action_item: action_item,
+                                                       action_group: action_item.action_group)
     
     # Redirect to the dashboard
     redirect_to dashboard_path

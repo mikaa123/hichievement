@@ -1,4 +1,10 @@
-<h5><%= action_group.name %></h5>
+<h5><%= action_group.name %> <small><%= action_group.desc %></small></h5>
+
+<% selected = selected_actions_from_group( action_group ) %>
+<% unless selected.empty? %>
+	<h6>Selected: <%= render selected %></h6>
+<% end %>
+
 <ul class="media-grid">
   <li>
 		<%= render action_group.action_items %>

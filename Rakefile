@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-MongoRspecOmniProj::Application.load_tasks
+Fingerprints::Application.load_tasks

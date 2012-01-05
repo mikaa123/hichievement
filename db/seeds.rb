@@ -9,8 +9,8 @@ puts 'EMPTY THE MONGODB DATABASE'
 Mongoid.master.collections.reject { |c| c.name =~ /^system/}.each(&:drop)
 
 # Let's create some groups
-food = ActionGroup.create!(name: "Food")
-drink = ActionGroup.create!(name: "Drink")
+food = ActionGroup.create!(name: "Food", desc: "What did you eat?")
+drink = ActionGroup.create!(name: "Drink", desc: "What did you drink?")
 
 food.action_items << ActionItem.new(name:"Pizza")
 food.action_items << ActionItem.new(name:"Rice")

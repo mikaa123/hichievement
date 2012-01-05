@@ -1,4 +1,4 @@
-MongoRspecOmniProj::Application.routes.draw do
+Fingerprints::Application.routes.draw do
   resources :action_items
   
   match '/dashboard/add_to_cart' => 'action_carts#add_to_cart'

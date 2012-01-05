@@ -22,7 +22,8 @@ FactoryGirl.define do
   end
   
   factory :action_cart_item do
-    action_item { Factory.build(:action_item) }
+    action_item  { Factory.build(:action_item) }
+    action_group { Factory.build(:action_group) }
   end
 
   factory :action_item do
