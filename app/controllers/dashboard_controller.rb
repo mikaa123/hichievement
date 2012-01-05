@@ -48,4 +48,12 @@ class DashboardController < ApplicationController
     # Then we return the calendar
     @calendar
   end
+  
+  def unlocked_achievements
+    @unlocked_achievements = current_user.unlocked_achievements
+  end
+  
+  def show_unlocked_achievement
+    @unlocked_achievement = current_user.unlocked_achievements.find(params[:id])
+  end
 end

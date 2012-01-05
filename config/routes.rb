@@ -1,7 +1,12 @@
-MongoRspecOmniProj::Application.routes.draw do  resources :action_items
+MongoRspecOmniProj::Application.routes.draw do
+  resources :action_items
+  
   match '/dashboard/add_to_cart' => 'action_carts#add_to_cart'
   match '/dashboard/empty_cart' => 'action_carts#empty_cart'
   match '/dashboard/checkout_cart' => 'action_carts#checkout_cart'
+  
+  match '/dashboard/unlocked_achievements' => 'dashboard#unlocked_achievements'
+  match '/dashboard/unlocked_achievements/:id' => 'dashboard#show_unlocked_achievement'  
   
   resources :performed_actions, :only => [ :create ]
   

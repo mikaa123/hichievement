@@ -1,0 +1,24 @@
+<div class="content">
+	<div class="page-header">
+		<h1>Achievements <small>Something to brag about.</h1>
+		</div>
+		<div class="row">
+			<div class="span10">
+				
+				<ul>
+				<% @unlocked_achievements.each do |unlocked_achievement| %>
+					<li>
+						<%= link_to unlocked_achievement.name,
+								{:action => 'show_unlocked_achievement', :id => unlocked_achievement.id}
+						%>
+					</li>
+				<% end %>
+				</ul>
+
+			</div>
+			<div class="span4">
+				<%= render :partial => 'sidebar', :locals => {:user => @current_user} %>
+			</div>
+		</div>
+	</div>
+</div>
